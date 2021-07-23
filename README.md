@@ -2,7 +2,7 @@
 - 👀 I’m interested in ai
 - 🌱 I’m currently learning ml, deep learning
 - 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me : - satheesh.s666@gmail.com
+- 📫 How to reach me 
 
 <!---
 sathish55/sathish55 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
