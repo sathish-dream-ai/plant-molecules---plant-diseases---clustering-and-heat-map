@@ -1,7 +1,7 @@
 - 👋 Hi, I’m @sathish
 - 👀 I’m interested in healthcare
-- 🌱 I’m currently learning ai
-- 💞️ I’m looking to collaborate on healthcare
+- 🌱 currently learning ai
+- 💞️ looking to collaborate on Data science projects
 
 
 <!---
