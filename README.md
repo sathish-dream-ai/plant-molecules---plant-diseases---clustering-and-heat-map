@@ -1,7 +1,4 @@
 
+A Data Scientist and AI Prompt Engineer specializing in pharmaceutical research, working with an open-source pharma academic research lab. Focused on applying AI, Machine Learning, and Deep Learning in cheminformatics and medicinal chemistry domains. Passionate about Generative AI and Prompt Engineering.
 
 
-<!---
-sathish55/sathish55 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
