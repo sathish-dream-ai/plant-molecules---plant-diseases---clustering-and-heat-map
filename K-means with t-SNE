@@ -1,0 +1,103 @@
+!pip install rdkit
+
+# Import libraries
+import pandas as pd
+import numpy as np
+from rdkit import Chem
+from rdkit.Chem.rdFingerprintGenerator import GetMorganGenerator
+from sklearn.manifold import TSNE
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+import seaborn as sns
+import os
+
+# Define input and output paths
+input_csv_path = '/content/total_molecules_plant_SMILES.csv'  # Modify this to the actual path of your input file
+output_folder = '/content/'  # Modify this to the desired output directory
+
+# Load data
+df = pd.read_csv(input_csv_path)
+
+# Drop rows with NaN SMILES but keep a copy of the original DataFrame for later use
+df = df.dropna(subset=['SMILES'])
+smiles_list = df['SMILES'].tolist()
+
+# Generate molecular fingerprints using the new MorganGenerator
+fingerprint_generator = GetMorganGenerator(radius=2, fpSize=2048)
+
+def smiles_to_fingerprint(smiles):
+    try:
+        mol = Chem.MolFromSmiles(smiles)
+        if mol:
+            return fingerprint_generator.GetFingerprint(mol)
+        else:
+            return None
+    except:
+        return None
+
+# Prepare lists for valid and invalid SMILES
+valid_smiles = []
+fingerprints = []
+invalid_smiles = []
+
+# Iterate over SMILES and generate fingerprints
+for idx, smiles in enumerate(smiles_list):
+    fp = smiles_to_fingerprint(smiles)
+    if fp is not None:
+        valid_smiles.append(smiles)
+        fingerprints.append(fp)
+    else:
+        invalid_smiles.append((idx, smiles))
+
+# Check for missing SMILES
+initial_smiles_count = len(smiles_list)
+valid_smiles_count = len(valid_smiles)
+missing_smiles_count = initial_smiles_count - valid_smiles_count
+
+print(f"Total SMILES entries: {initial_smiles_count}")
+print(f"Valid SMILES entries: {valid_smiles_count}")
+print(f"Missing SMILES entries: {missing_smiles_count}")
+
+# Create DataFrame from valid SMILES and corresponding original data
+df_valid = df[df['SMILES'].isin(valid_smiles)].copy()
+
+# Perform t-SNE dimensionality reduction only if enough valid fingerprints exist
+if len(fingerprints) > 30:
+    fingerprint_matrix = np.array([list(fp) for fp in fingerprints])
+    tsne = TSNE(n_components=2, random_state=42)
+    tsne_results = tsne.fit_transform(fingerprint_matrix)
+
+    # Determine number of clusters dynamically
+    n_clusters = len(df_valid) // 10 if len(df_valid) >= 100 else 10
+
+    # Apply K-means clustering
+    kmeans = KMeans(n_clusters=n_clusters, n_init=14, random_state=42)
+    clusters = kmeans.fit_predict(tsne_results)
+    df_valid['Cluster'] = clusters
+
+    # Sort DataFrame by 'Cluster' column
+    df_sorted = df_valid.sort_values(by='Cluster')
+
+    # Save the output to a CSV file
+    output_csv_path = 'total_SMILES_clustering_results.csv'
+    df_sorted.to_csv(output_csv_path, index=False)
+
+    # Generate and save the t-SNE plot with cluster labels
+    plt.figure(figsize=(15, 15), dpi=200)
+    plt.scatter(tsne_results[:, 0], tsne_results[:, 1], c=clusters, cmap='jet', marker='o')
+
+    # Calculate and annotate centroids
+    centroids = np.array([tsne_results[clusters == i].mean(axis=0) for i in range(kmeans.n_clusters)])
+    for i, centroid in enumerate(centroids):
+        plt.text(centroid[0], centroid[1], str(i), color='white', ha='center', va='center',
+                 weight='bold', size=12, bbox=dict(facecolor='black', alpha=0.5, edgecolor='none', boxstyle='round,pad=0.5'))
+
+    plt.colorbar()
+    plt.title('t-SNE plot of molecular fingerprints with cluster numbers')
+    plt.xlabel('t-SNE 1')
+    plt.ylabel('t-SNE 2')
+    tsne_plot_path = 'tsne_plot.png'
+    plt.savefig(tsne_plot_path, dpi=300)
+    plt.show()
+else:
+    print("Not enough data for t-SNE, check if the dataset or SMILES column has enough valid entries.")
