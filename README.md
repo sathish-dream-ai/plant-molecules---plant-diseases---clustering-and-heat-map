@@ -1,4 +1,4 @@
 
-K-means clustering with t-SNE and PyTorch based heat maps
+K-means clustering with t-SNE of SMILES and PyTorch based heat maps 
 
 
