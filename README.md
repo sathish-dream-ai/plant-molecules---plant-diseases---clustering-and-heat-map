@@ -1,5 +1,6 @@
 
 Molecular Clustering Analysis Tool
+
 A Python-based tool for analyzing and clustering molecular structures using SMILES notation, fingerprint generation, and dimensionality reduction techniques.
 
 Features
@@ -11,6 +12,7 @@ Features
 6. Handles invalid SMILES gracefully
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
 Molecular Disease Association Analysis Tool
+
 A Python-based deep learning tool for analyzing associations between molecules, plants, and diseases using neural networks and data visualization techniques.
 
 Features
