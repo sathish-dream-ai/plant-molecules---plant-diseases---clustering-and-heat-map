@@ -20,7 +20,7 @@ Requirements
 5. matplotlib
 6. seaborn
 -------------------------------------------------------------------------------------------------------------------------------------------------------------
-Molecular Disease Association Generation Script
+Molecule Disease Association Generation Script
 
 A Python script for analyzing associations between molecules, plants, and diseases using neural networks and data visualization techniques.
 
