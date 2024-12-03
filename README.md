@@ -1,7 +1,7 @@
 
-Molecular Clustering Analysis Tool
+Molecule-Disease Clustering  Generation Script
 
-A Python-based tool for analyzing and clustering molecular structures using SMILES notation, fingerprint generation, and dimensionality reduction techniques.
+A Python script for analyzing and clustering molecular structures using SMILES notation, fingerprint generation, and dimensionality reduction techniques.
 
 Features
 1. Processes molecular SMILES data
@@ -10,16 +10,33 @@ Features
 4. Implements K-means clustering
 5. Visualizes molecular clusters
 6. Handles invalid SMILES gracefully
--------------------------------------------------------------------------------------------------------------------------------------------------------------
-Molecular Disease Association Analysis Tool
 
-A Python-based deep learning tool for analyzing associations between molecules, plants, and diseases using neural networks and data visualization techniques.
+Requirements
+
+1. rdkit
+2. pandas
+3. numpy
+4. scikit-learn
+5. matplotlib
+6. seaborn
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
+Molecular Disease Association Generation Script
+
+A Python script for analyzing associations between molecules, plants, and diseases using neural networks and data visualization techniques.
 
 Features
+
 1. Neural network-based classification of molecular clusters
 2. Automated data processing pipeline
 3. Interactive heatmap generation
 4. Detailed CSV output generation
 5. Support for multiple molecules and diseases
 6. Comprehensive logging system
+
+Requirements
+
+1. pandas
+2. torch
+3. matplotlib
+4. seaborn
 ----------------------------------------------------------------------------------------------------------------------
