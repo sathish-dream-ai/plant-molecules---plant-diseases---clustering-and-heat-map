@@ -18,7 +18,7 @@ An unsupervised machine learning and knowledge graph pipeline that groups plant-
 * **Knowledge graph integration of clustered medicinal plants, molecules, diseases, and targets** 
   *Authors: UK Shajil, Jaleel UCA, S. Sathish, Sandesh EPA, A. Sujith, Baiju G. Nair*[cite: 27]
   *Journal: Computational Biology and Chemistry (Elsevier), Volume 122, 2026, 108895*[cite: 27]
-  *[Link to Paper]((https://www.sciencedirect.com/science/article/pii/S1476927126000204))*
+  *[Link to Paper](https://www.sciencedirect.com/science/article/pii/S1476927126000204)*
 
 
 ## 🚀 Usage
